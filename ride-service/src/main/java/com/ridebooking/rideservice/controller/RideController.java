@@ -6,10 +6,17 @@ import com.ridebooking.rideservice.dto.RideResponse;
 import com.ridebooking.rideservice.service.RideService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/rides")
@@ -19,8 +26,63 @@ public class RideController {
 
     private final RideService rideService;
 
+    @PostMapping("/request")
     public ResponseEntity<RideResponse> requestRide(@RequestBody RideRequest rideRequest) {
+        log.info("Request ride : {}", rideRequest);
 
-        return null;
+        RideResponse response = rideService.requestRide(rideRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+
+    @GetMapping("/{rideId}")
+    public ResponseEntity<RideResponse> getRide(@PathVariable String rideId) {
+        log.info("Get ride details of Ride Id : {}", rideId);
+
+        RideResponse response = rideService.getRideDetails(rideId);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("/{riderId}")
+    public ResponseEntity<List<RideResponse>> getAllRides(@PathVariable String riderId) {
+        log.info("Fetching all rides of Rider : {}", riderId);
+
+        List<RideResponse> response = rideService.getAllRides(riderId);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/start/{rideId}")
+    public ResponseEntity<List<RideResponse>> startRide(@PathVariable String rideId) {
+        log.info("Starting the ride : {}", rideId);
+
+        List<RideResponse> response = rideService.startRide(rideId);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/complete/{rideId}")
+    public ResponseEntity<List<RideResponse>> startRide(@PathVariable String rideId) {
+        log.info("Completing the ride : {}", rideId);
+
+        List<RideResponse> response = rideService.completeRide(rideId);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/cancel/{rideId}")
+    public ResponseEntity<List<RideResponse>> cancelRide(@PathVariable String rideId) {
+        log.info("Cancelling the ride : {}", rideId);
+
+        List<RideResponse> response = rideService.cancelRide(rideId);
+
+        return ResponseEntity.ok(response);
+    }
+
 }
