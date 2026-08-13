@@ -2,6 +2,7 @@ package com.ridebooking.rideservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,16 +15,17 @@ import java.time.LocalDateTime;
 @Table(name = "rides")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Ride {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String rideId;
 
     private String driverId;
 
     @Column(nullable = false)
-    private String rideId;
+    private String riderId;
 
     @Column(nullable = false)
     private double pickupLongitude;

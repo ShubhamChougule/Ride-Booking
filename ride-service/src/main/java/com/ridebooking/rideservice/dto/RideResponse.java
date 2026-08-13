@@ -1,23 +1,21 @@
 package com.ridebooking.rideservice.dto;
 
 import com.ridebooking.rideservice.model.RideStatus;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RideResponse {
-    private String id;
-    private String driverId;
     private String rideId;
+    private String driverId;
+    private String riderId;
     private double pickupLongitude;
     private double pickupLatitude;
     private String pickUpAddress;

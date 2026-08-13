@@ -57,30 +57,30 @@ public class RideController {
 
 
     @PutMapping("/start/{rideId}")
-    public ResponseEntity<List<RideResponse>> startRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> startRide(@PathVariable String rideId) {
         log.info("Starting the ride : {}", rideId);
 
-        List<RideResponse> response = rideService.startRide(rideId);
+        RideResponse response = rideService.startRide(rideId);
 
         return ResponseEntity.ok(response);
     }
 
 
     @PutMapping("/complete/{rideId}")
-    public ResponseEntity<List<RideResponse>> startRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> completeRide(@PathVariable String rideId) {
         log.info("Completing the ride : {}", rideId);
 
-        List<RideResponse> response = rideService.completeRide(rideId);
+        RideResponse response = rideService.completeRide(rideId);
 
         return ResponseEntity.ok(response);
     }
 
 
     @PutMapping("/cancel/{rideId}")
-    public ResponseEntity<List<RideResponse>> cancelRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> cancelRide(@PathVariable String rideId) {
         log.info("Cancelling the ride : {}", rideId);
 
-        List<RideResponse> response = rideService.cancelRide(rideId);
+        RideResponse response = rideService.cancelRide(rideId);
 
         return ResponseEntity.ok(response);
     }
