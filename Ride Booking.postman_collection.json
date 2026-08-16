@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "a18f3b76-e8d8-455b-82f8-f87a2ec2348d",
+    "name": "Ride Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30994115"
+  },
+  "item": [
+    {
+      "name": "Location Service",
+      "item": [
+        {
+          "name": "Update Driver Location",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"driver_id\" : \"driver-1\",\r\n//     \"latitude\" : 63.3435,\r\n//     \"longitude\" : 62.3435\r\n// }\r\n\r\n// {\r\n//     \"driver_id\" : \"driver-2\",\r\n//     \"latitude\" : 63.554,\r\n//     \"longitude\" : 62.234\r\n// }\r\n\r\n\r\n{\r\n    \"driver_id\" : \"driver-3\",\r\n    \"latitude\" : 61.999,\r\n    \"longitude\" : 61.999\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8082/api/v1/locations/drivers/update",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "locations",
+                "drivers",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Driver",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:8082/api/v1/locations/drivers/driver-1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "v1",
+                "locations",
+                "drivers",
+                "driver-1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ride Service",
+      "item": [
+        {
+          "name": "Request Ride",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"rider_id\": \"RIDER1234\",\r\n  \"pickup_longitude\": 61.999,\r\n  \"pickup_latitude\": 61.999,\r\n  \"pick_up_address\": \"Pune, Maharashtra, India\",\r\n  \"drop_longitude\": 73.8567,\r\n  \"drop_latitude\": 18.5204,\r\n  \"drop_address\": \"Mumbai, Maharashtra, India\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/request",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "request"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Ride Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/8dcf8c53-c809-436f-82a2-bbaf2520c0ac",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "8dcf8c53-c809-436f-82a2-bbaf2520c0ac"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Rides of Rider",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/rider/",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "rider",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Start Ride",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/start/8dcf8c53-c809-436f-82a2-bbaf2520c0ac",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "start",
+                "8dcf8c53-c809-436f-82a2-bbaf2520c0ac"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Complete Ride",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/complete/8dcf8c53-c809-436f-82a2-bbaf2520c0ac",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "complete",
+                "8dcf8c53-c809-436f-82a2-bbaf2520c0ac"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel Ride",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "localhost:8083/api/v1/rides/cancel/8dcf8c53-c809-436f-82a2-bbaf2520c0ac",
+              "host": [
+                "localhost"
+              ],
+              "port": "8083",
+              "path": [
+                "api",
+                "v1",
+                "rides",
+                "cancel",
+                "8dcf8c53-c809-436f-82a2-bbaf2520c0ac"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
