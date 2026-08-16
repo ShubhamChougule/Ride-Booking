@@ -6,7 +6,7 @@ spring:
     name: ride-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ride-booking
+    url: jdbc:mysql://localhost:3306/uber
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

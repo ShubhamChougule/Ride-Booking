@@ -7,12 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.geo.*;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@Service
 public class LocationService {
 
     private static final String DRIVERS_GEO_KEY = "drivers:locations";

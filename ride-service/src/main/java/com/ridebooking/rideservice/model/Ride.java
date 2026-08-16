@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Ride {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String rideId;
 
     private String driverId;
