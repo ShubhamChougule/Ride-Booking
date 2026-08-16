@@ -37,7 +37,7 @@ public class RideController {
 
 
     @GetMapping("/{rideId}")
-    public ResponseEntity<RideResponse> getRide(@PathVariable Long rideId) {
+    public ResponseEntity<RideResponse> getRide(@PathVariable String rideId) {
         log.info("Get ride details of Ride Id : {}", rideId);
 
         RideResponse response = rideService.getRideDetails(rideId);
@@ -46,7 +46,7 @@ public class RideController {
     }
 
 
-    @GetMapping("/{riderId}")
+    @GetMapping("/rider/{riderId}")
     public ResponseEntity<List<RideResponse>> getAllRides(@PathVariable Long riderId) {
         log.info("Fetching all rides of Rider : {}", riderId);
 
@@ -57,7 +57,7 @@ public class RideController {
 
 
     @PutMapping("/start/{rideId}")
-    public ResponseEntity<RideResponse> startRide(@PathVariable Long rideId) {
+    public ResponseEntity<RideResponse> startRide(@PathVariable String rideId) {
         log.info("Starting the ride : {}", rideId);
 
         RideResponse response = rideService.startRide(rideId);
@@ -67,7 +67,7 @@ public class RideController {
 
 
     @PutMapping("/complete/{rideId}")
-    public ResponseEntity<RideResponse> completeRide(@PathVariable Long rideId) {
+    public ResponseEntity<RideResponse> completeRide(@PathVariable String rideId) {
         log.info("Completing the ride : {}", rideId);
 
         RideResponse response = rideService.completeRide(rideId);
@@ -77,7 +77,7 @@ public class RideController {
 
 
     @PutMapping("/cancel/{rideId}")
-    public ResponseEntity<RideResponse> cancelRide(@PathVariable Long rideId) {
+    public ResponseEntity<RideResponse> cancelRide(@PathVariable String rideId) {
         log.info("Cancelling the ride : {}", rideId);
 
         RideResponse response = rideService.cancelRide(rideId);

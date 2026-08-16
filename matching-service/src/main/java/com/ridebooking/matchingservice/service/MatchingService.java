@@ -49,7 +49,7 @@ public class MatchingService {
                 .distanceToPickup(driver.getDistanceInKm())
                 .build();
 
-        kafkaTemplate.send(RIDE_MATCHED_TOPIC, String.valueOf(event.getRideId()), rideMatchedEvent);
+        kafkaTemplate.send(RIDE_MATCHED_TOPIC, event.getRideId(), rideMatchedEvent);
         log.info("Event Published to kafka topic : {}, Id : {}, Event Ride Matched : {}", RIDE_MATCHED_TOPIC, event.getRideId(), rideMatchedEvent);
     }
 

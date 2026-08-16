@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class RideMatchedEvent {
-    private Long rideId;
+    private String rideId;
     private String riderId;
     private String driverId;
     private double driverLongitude;

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -32,6 +33,7 @@ public class RideService {
 
         Ride ride = Ride.builder()
                 .riderId(request.getRiderId())
+                .rideId(UUID.randomUUID().toString())
                 .pickupLatitude(request.getPickupLatitude())
                 .pickupLongitude(request.getPickupLongitude())
                 .pickUpAddress(request.getPickUpAddress())
@@ -55,7 +57,7 @@ public class RideService {
                 .dropLongitude(savedRide.getDropLongitude())
                 .build();
 
-        kafkaTemplate.send(RIDE_REQUESTED_TOPIC, String.valueOf(event.getRideId()), event);
+        kafkaTemplate.send(RIDE_REQUESTED_TOPIC, event.getRideId(), event);
 
         log.info("Ride request event published to kafka ride id : {}", event.getRideId());
 
@@ -87,8 +89,8 @@ public class RideService {
     }
 
 
-    public void updateRideWithDriver(Long rideId , String driverId) {
-        Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
+    public void updateRideWithDriver(String rideId , String driverId) {
+        Ride ride = rideRepository.findByRideId(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
         ride.setDriverId(driverId);
@@ -122,8 +124,8 @@ public class RideService {
         return Math.round(fare * 100.0) / 100.0;
     }
 
-    public RideResponse getRideDetails(Long rideId) {
-        Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
+    public RideResponse getRideDetails(String rideId) {
+        Ride ride = rideRepository.findByRideId(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
         return mapToRideResponse(ride);
     }
@@ -134,8 +136,8 @@ public class RideService {
         return rideList.stream().map(this::mapToRideResponse).toList();
     }
 
-    public RideResponse startRide(Long rideId) {
-        Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
+    public RideResponse startRide(String rideId) {
+        Ride ride = rideRepository.findByRideId(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
         if (ride.getRideStatus() != RideStatus.ACCEPTED) {
@@ -147,8 +149,8 @@ public class RideService {
         return mapToRideResponse(rideRepository.save(ride));
     }
 
-    public RideResponse completeRide(Long rideId) {
-        Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
+    public RideResponse completeRide(String rideId) {
+        Ride ride = rideRepository.findByRideId(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
         if (ride.getRideStatus() != RideStatus.RIDE_STARTED) {
@@ -162,12 +164,12 @@ public class RideService {
     }
 
     private double getActualFare(Ride ride) {
-        return 0;
+        return ride.getEstimatedFare();
     }
 
 
-    public RideResponse cancelRide(Long rideId) {
-        Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
+    public RideResponse cancelRide(String rideId) {
+        Ride ride = rideRepository.findByRideId(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
         if (ride.getRideStatus() != RideStatus.RIDE_STARTED) {

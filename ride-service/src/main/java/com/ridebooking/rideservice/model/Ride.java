@@ -20,7 +20,10 @@ public class Ride {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rideId;
+    private Long id;
+
+    @Column(nullable = false)
+    private String rideId;
 
     private String driverId;
 
