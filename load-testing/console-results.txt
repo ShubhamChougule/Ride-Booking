@@ -52,3 +52,66 @@ PS C:\Users\shubh\Documents\Ride Booking\testing> k6 run --out json=results.json
 running (2m04.9s), 000/250 VUs, 5673 complete and 0 interrupted iterations
 driver_pings  ✓ [======================================] 200 VUs    2m0s
 ride_requests ✓ [======================================] 00/50 VUs  1m40s
+
+
+
+
+TEST 2 :
+
+
+NBTAST1671:load-testing nbt4080$ k6 run --out json=results2.json loadtest.js
+
+         /\      Grafana   /‾‾/
+    /\  /  \     |\  __   /  /
+   /  \/    \    | |/ /  /   ‾‾\
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/
+
+
+     execution: local
+        script: loadtest.js
+        output: json (results2.json)
+
+     scenarios: (100.00%) 2 scenarios, 250 max VUs, 2m30s max duration (incl. graceful stop):
+              * driver_pings: 200 looping VUs for 2m0s (exec: driverPing, gracefulStop: 30s)
+              * ride_requests: Up to 50 looping VUs for 1m40s over 3 stages (gracefulRampDown: 30s, exec: requestRide, startTime: 10s, gracefulStop: 30s)
+
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 15315   122.831667/s
+    checks_succeeded...: 100.00% 15315 out of 15315
+    checks_failed......: 0.00%   0 out of 15315
+
+    ✓ location update 200
+    ✓ ride request 200/201
+    ✓ driver matched within 10s
+
+    CUSTOM
+    driver_match_latency_ms........: avg=516.320407 min=508      med=514    max=837      p(90)=524     p(95)=528
+
+    HTTP
+    http_req_duration..............: avg=12ms       min=394µs    med=3.06ms max=523.73ms p(90)=13.51ms p(95)=17.3ms
+      { expected_response:true }...: avg=12ms       min=394µs    med=3.06ms max=523.73ms p(90)=13.51ms p(95)=17.3ms
+    http_req_failed................: 0.00%  0 out of 15315
+    http_reqs......................: 15315  122.831667/s
+
+    EXECUTION
+    iteration_duration.............: avg=2.5s       min=507.88ms med=3.24s  max=5.53s    p(90)=4.66s   p(95)=4.83s
+    iterations.....................: 10699  85.809729/s
+    vus............................: 12     min=12         max=249
+    vus_max........................: 250    min=250        max=250
+
+    NETWORK
+    data_received..................: 6.2 MB 50 kB/s
+    data_sent......................: 3.8 MB 31 kB/s
+
+
+
+
+running (2m04.7s), 000/250 VUs, 10699 complete and 0 interrupted iterations
+driver_pings  ✓ [======================================] 200 VUs    2m0s
+ride_requests ✓ [======================================] 00/50 VUs  1m40s
+NBTAST1671:load-testing nbt4080$
+
