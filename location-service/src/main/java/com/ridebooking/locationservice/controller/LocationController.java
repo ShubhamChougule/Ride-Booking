@@ -27,9 +27,10 @@ public class LocationController {
 
 
     @GetMapping("/drivers/nearby")
-    public ResponseEntity<List<NearbyDriverResponse>> updateDriverLocation(@RequestParam double latitude,
-    @RequestParam double longitude, @RequestParam double radius
-                                                       ) {
+    public ResponseEntity<List<NearbyDriverResponse>> updateDriverLocation(
+            @RequestParam double latitude,
+            @RequestParam double longitude,
+            @RequestParam(defaultValue = "5.0") double radius) {
         List<NearbyDriverResponse> driverList = locationService.findNearbyDriver(latitude, longitude, radius);
 
         return ResponseEntity.ok(driverList);
