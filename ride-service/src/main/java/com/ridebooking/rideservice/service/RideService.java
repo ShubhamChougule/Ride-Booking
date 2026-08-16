@@ -55,7 +55,7 @@ public class RideService {
                 .dropLongitude(savedRide.getDropLongitude())
                 .build();
 
-        kafkaTemplate.send(RIDE_REQUESTED_TOPIC, event.getRideId(), event);
+        kafkaTemplate.send(RIDE_REQUESTED_TOPIC, String.valueOf(event.getRideId()), event);
 
         log.info("Ride request event published to kafka ride id : {}", event.getRideId());
 
@@ -67,7 +67,7 @@ public class RideService {
 
     private RideResponse mapToRideResponse(Ride ride) {
         return RideResponse.builder()
-                .rideId(ride.getRideId())
+                .rideId(String.valueOf(ride.getRideId()))
                 .driverId(ride.getDriverId())
                 .riderId(ride.getRiderId())
                 .pickupLongitude(ride.getPickupLongitude())
@@ -87,7 +87,7 @@ public class RideService {
     }
 
 
-    public void updateRideWithDriver(String driverId, String rideId) {
+    public void updateRideWithDriver(Long rideId , String driverId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
@@ -122,19 +122,19 @@ public class RideService {
         return Math.round(fare * 100.0) / 100.0;
     }
 
-    public RideResponse getRideDetails(String rideId) {
+    public RideResponse getRideDetails(Long rideId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
         return mapToRideResponse(ride);
     }
 
-    public List<RideResponse> getAllRides(String riderId) {
+    public List<RideResponse> getAllRides(Long riderId) {
         List<Ride> rideList = rideRepository.findByRiderIdOrderByCreatedAtDesc(riderId);
 
         return rideList.stream().map(this::mapToRideResponse).toList();
     }
 
-    public RideResponse startRide(String rideId) {
+    public RideResponse startRide(Long rideId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
@@ -147,7 +147,7 @@ public class RideService {
         return mapToRideResponse(rideRepository.save(ride));
     }
 
-    public RideResponse completeRide(String rideId) {
+    public RideResponse completeRide(Long rideId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
@@ -166,7 +166,7 @@ public class RideService {
     }
 
 
-    public RideResponse cancelRide(String rideId) {
+    public RideResponse cancelRide(Long rideId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 

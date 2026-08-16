@@ -18,7 +18,7 @@ public class LocationController {
 
     private final LocationService locationService;
 
-    @PatchMapping("/drivers/update")
+    @PostMapping("/drivers/update")
     public ResponseEntity<String> updateDriverLocation(@RequestBody DriverLocationRequest driverLocationRequest) {
         locationService.updateDriverLocation(driverLocationRequest);
 
@@ -37,8 +37,8 @@ public class LocationController {
     }
 
 
-    @GetMapping("/drivers/{driverId}")
-    public ResponseEntity<String> updateDriverLocation(@PathVariable String driverId) {
+    @DeleteMapping("/drivers/{driverId}")
+    public ResponseEntity<String> logoutDriver(@PathVariable String driverId) {
         locationService.removeDriver(driverId);
 
         return ResponseEntity.ok("Driver removed..");

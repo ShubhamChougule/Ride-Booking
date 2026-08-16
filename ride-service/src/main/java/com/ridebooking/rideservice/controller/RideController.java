@@ -28,7 +28,7 @@ public class RideController {
 
     @PostMapping("/request")
     public ResponseEntity<RideResponse> requestRide(@RequestBody RideRequest rideRequest) {
-        log.info("Request ride : {}", rideRequest);
+        log.info("Ride Requested : {}", rideRequest);
 
         RideResponse response = rideService.requestRide(rideRequest);
 
@@ -37,7 +37,7 @@ public class RideController {
 
 
     @GetMapping("/{rideId}")
-    public ResponseEntity<RideResponse> getRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> getRide(@PathVariable Long rideId) {
         log.info("Get ride details of Ride Id : {}", rideId);
 
         RideResponse response = rideService.getRideDetails(rideId);
@@ -47,7 +47,7 @@ public class RideController {
 
 
     @GetMapping("/{riderId}")
-    public ResponseEntity<List<RideResponse>> getAllRides(@PathVariable String riderId) {
+    public ResponseEntity<List<RideResponse>> getAllRides(@PathVariable Long riderId) {
         log.info("Fetching all rides of Rider : {}", riderId);
 
         List<RideResponse> response = rideService.getAllRides(riderId);
@@ -57,7 +57,7 @@ public class RideController {
 
 
     @PutMapping("/start/{rideId}")
-    public ResponseEntity<RideResponse> startRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> startRide(@PathVariable Long rideId) {
         log.info("Starting the ride : {}", rideId);
 
         RideResponse response = rideService.startRide(rideId);
@@ -67,7 +67,7 @@ public class RideController {
 
 
     @PutMapping("/complete/{rideId}")
-    public ResponseEntity<RideResponse> completeRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> completeRide(@PathVariable Long rideId) {
         log.info("Completing the ride : {}", rideId);
 
         RideResponse response = rideService.completeRide(rideId);
@@ -77,7 +77,7 @@ public class RideController {
 
 
     @PutMapping("/cancel/{rideId}")
-    public ResponseEntity<RideResponse> cancelRide(@PathVariable String rideId) {
+    public ResponseEntity<RideResponse> cancelRide(@PathVariable Long rideId) {
         log.info("Cancelling the ride : {}", rideId);
 
         RideResponse response = rideService.cancelRide(rideId);

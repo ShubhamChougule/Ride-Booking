@@ -21,7 +21,7 @@ public class LocationService {
     private final RedisTemplate<String, String> redisTemplate;
 
     public void updateDriverLocation(DriverLocationRequest driverLocationRequest) {
-        log.info("Updating driver location for driver : {}", driverLocationRequest.getDriverId());
+        log.info("Updating location for driver : {}", driverLocationRequest.getDriverId());
 
         Point driverPoint = new Point(
                 driverLocationRequest.getLongitude(),
