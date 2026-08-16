@@ -87,7 +87,7 @@ public class RideService {
     }
 
 
-    private void updateRideWithDriver(String driverId, String rideId) {
+    public void updateRideWithDriver(String driverId, String rideId) {
         Ride ride = rideRepository.findById(rideId).orElseThrow(() ->
                 new RuntimeException("No Ride found with given ride id"));
 
