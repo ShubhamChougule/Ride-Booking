@@ -67,7 +67,7 @@ public class RideService {
 
     private RideResponse mapToRideResponse(Ride ride) {
         return RideResponse.builder()
-                .rideId(String.valueOf(ride.getRideId()))
+                .rideId(ride.getRideId())
                 .driverId(ride.getDriverId())
                 .riderId(ride.getRiderId())
                 .pickupLongitude(ride.getPickupLongitude())

@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RideResponse {
-    private String rideId;
+    private Long rideId;
     private String driverId;
     private String riderId;
     private double pickupLongitude;

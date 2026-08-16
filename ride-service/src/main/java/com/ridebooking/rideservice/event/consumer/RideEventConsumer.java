@@ -17,7 +17,7 @@ public class RideEventConsumer {
     @KafkaListener(
             topics = "ride.matched",
             groupId = "ride-service-group")
-    public void rideRequestedEvent(RideMatchedEvent event) {
+    public void rideMatchedEventListener(RideMatchedEvent event) {
         try {
             rideService.updateRideWithDriver(event.getRideId(), event.getDriverId());
         } catch (Exception ex) {

@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class RideRequestedEvent {
 
-    private String rideId;
+    private Long rideId;
     private String riderId;
     private double pickupLongitude;
     private double pickupLatitude;

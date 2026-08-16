@@ -42,13 +42,14 @@ public class MatchingService {
 
         RideMatchedEvent rideMatchedEvent = RideMatchedEvent.builder()
                 .rideId(event.getRideId())
+                .driverId(driver.getDriverId())
                 .riderId(event.getRiderId())
                 .driverLatitude(driver.getLatitude())
                 .driverLongitude(driver.getLongitude())
                 .distanceToPickup(driver.getDistanceInKm())
                 .build();
 
-        kafkaTemplate.send(RIDE_MATCHED_TOPIC, event.getRideId(), rideMatchedEvent);
+        kafkaTemplate.send(RIDE_MATCHED_TOPIC, String.valueOf(event.getRideId()), rideMatchedEvent);
         log.info("Event Published to kafka topic : {}, Id : {}, Event Ride Matched : {}", RIDE_MATCHED_TOPIC, event.getRideId(), rideMatchedEvent);
     }
 

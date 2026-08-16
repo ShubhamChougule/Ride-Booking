@@ -25,9 +25,9 @@ spring:
 
     consumer:
       group-id: ride-service-group
-      auto-offset-reset: earliest
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
       properties:
         spring:
           json:
@@ -38,7 +38,7 @@ spring:
                 headers: false
             value:
               default:
-                type: com.ridebooking.rideservice.event.RideRequestedEvent
+                type: com.ridebooking.rideservice.event.RideMatchedEvent
 
 
     producer:
