@@ -1,0 +1,54 @@
+PS C:\Users\shubh\Documents\Ride Booking\testing> k6 run --out json=results.json loadtest.js
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: loadtest.js
+        output: json (results.json)
+
+     scenarios: (100.00%) 2 scenarios, 250 max VUs, 2m30s max duration (incl. graceful stop):
+              * driver_pings: 200 looping VUs for 2m0s (exec: driverPing, gracefulStop: 30s)
+              * ride_requests: Up to 50 looping VUs for 1m40s over 3 stages (gracefulRampDown: 30s, exec: requestRide, startTime: 10s, gracefulStop: 30s)
+
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 6113    48.927929/s
+    checks_succeeded...: 100.00% 6113 out of 6113
+    checks_failed......: 0.00%   0 out of 6113
+
+    ✓ location update 200
+    ✓ ride request 200/201
+    ✓ driver matched within 10s
+
+    CUSTOM
+    driver_match_latency_ms........: avg=5635.370455 min=547      med=5173.5   max=17372  p(90)=9737.8   p(95)=11579.65
+
+    HTTP
+    http_req_duration..............: avg=440.56ms    min=2.98ms   med=117.86ms max=8.62s  p(90)=931.69ms p(95)=1.4s    
+      { expected_response:true }...: avg=440.56ms    min=2.98ms   med=117.86ms max=8.62s  p(90)=931.69ms p(95)=1.4s    
+    http_req_failed................: 0.00%  0 out of 8382
+    http_reqs......................: 8382   67.088811/s
+
+    EXECUTION
+    iteration_duration.............: avg=4.72s       min=547.57ms med=4.43s    max=17.85s p(90)=5.8s     p(95)=7.59s   
+    iterations.....................: 5673   45.406207/s
+    vus............................: 1      min=1         max=250
+    vus_max........................: 250    min=250       max=250
+
+    NETWORK
+    data_received..................: 2.5 MB 20 kB/s
+    data_sent......................: 1.7 MB 14 kB/s
+
+
+
+
+running (2m04.9s), 000/250 VUs, 5673 complete and 0 interrupted iterations
+driver_pings  ✓ [======================================] 200 VUs    2m0s
+ride_requests ✓ [======================================] 00/50 VUs  1m40s
