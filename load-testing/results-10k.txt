@@ -1,0 +1,68 @@
+Shubham:load-testing Shub$ redis-cli ZCARD drivers:locations
+(integer) 200
+Shubham:load-testing Shub$ redis-cli DEL drivers:locations
+(integer) 1
+Shubham:load-testing Shub$ redis-cli ZCARD drivers:locations
+(integer) 0
+Shubham:load-testing Shub$ k6 run --out json=results-10k.json loadtest.js
+
+         /\      Grafana   /‾‾/
+    /\  /  \     |\  __   /  /
+   /  \/    \    | |/ /  /   ‾‾\
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/
+
+
+     execution: local
+        script: loadtest.js
+        output: json (results-10k.json)
+
+     scenarios: (100.00%) 3 scenarios, 170 max VUs, 3m15s max duration (incl. graceful stop):
+              * seed_drivers: 10000 iterations shared among 50 VUs (maxDuration: 1m0s, exec: seedDriver, gracefulStop: 30s)
+              * driver_pings: 100 looping VUs for 2m0s (exec: driverPing, startTime: 45s, gracefulStop: 30s)
+              * ride_requests: 20 looping VUs for 1m30s (exec: requestRide, startTime: 1m0s, gracefulStop: 30s)
+
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 19730   116.138046/s
+    checks_succeeded...: 100.00% 19730 out of 19730
+    checks_failed......: 0.00%   0 out of 19730
+
+    ✓ driver seeded 200
+    ✓ location update 200
+    ✓ ride request 200/201
+    ✓ driver matched within 10s
+
+    CUSTOM
+    driver_match_latency_ms........: avg=541.414072 min=517      med=540    max=627     p(90)=554.1   p(95)=559
+    drivers_seeded.................: 10000  58.863683/s
+
+    HTTP
+    http_req_duration..............: avg=9.85ms     min=469µs    med=5.23ms max=99.35ms p(90)=24.54ms p(95)=29.23ms
+      { expected_response:true }...: avg=9.85ms     min=469µs    med=5.23ms max=99.35ms p(90)=24.54ms p(95)=29.23ms
+    http_req_failed................: 0.00%  0 out of 19730
+    http_reqs......................: 19730  116.138046/s
+
+    EXECUTION
+    iteration_duration.............: avg=858.38ms   min=610.91µs med=6.52ms max=5.04s   p(90)=3.92s   p(95)=4.44s
+    iterations.....................: 16390  96.477576/s
+    vus............................: 6      min=0          max=120
+    vus_max........................: 170    min=170        max=170
+
+    NETWORK
+    data_received..................: 5.7 MB 34 kB/s
+    data_sent......................: 4.9 MB 29 kB/s
+
+
+
+
+running (2m49.9s), 000/170 VUs, 16390 complete and 0 interrupted iterations
+seed_drivers  ✓ [======================================] 50 VUs   0m01.0s/1m0s  10000/10000 shared iters
+driver_pings  ✓ [======================================] 100 VUs  2m0s
+ride_requests ✓ [======================================] 20 VUs   1m30s
+Shubham:load-testing Shub$ redis-cli ZCARD drivers:locations
+(integer) 10100
+Shubham:load-testing Shub$
+

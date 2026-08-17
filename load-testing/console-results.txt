@@ -59,7 +59,7 @@ ride_requests ✓ [======================================] 00/50 VUs  1m40s
 TEST 2 :
 
 
-NBTAST1671:load-testing nbt4080$ k6 run --out json=results2.json loadtest.js
+Shubham:load-testing Shub$ k6 run --out json=results2.json loadtest.js
 
          /\      Grafana   /‾‾/
     /\  /  \     |\  __   /  /
@@ -113,5 +113,5 @@ NBTAST1671:load-testing nbt4080$ k6 run --out json=results2.json loadtest.js
 running (2m04.7s), 000/250 VUs, 10699 complete and 0 interrupted iterations
 driver_pings  ✓ [======================================] 200 VUs    2m0s
 ride_requests ✓ [======================================] 00/50 VUs  1m40s
-NBTAST1671:load-testing nbt4080$
+Shubham:load-testing Shub$
 
