@@ -19,7 +19,9 @@ public class RideEventConsumer {
             groupId = "ride-service-group")
     public void rideMatchedEventListener(RideMatchedEvent event) {
         try {
+            log.info("Ride Matched Event Received for Ride Id : {} || Driver Id : {}", event.getRideId(), event.getDriverId());
             rideService.updateRideWithDriver(event.getRideId(), event.getDriverId());
+            log.info("Ride Matched Event Consumed for Ride Id : {} || Driver Id : {}", event.getRideId(), event.getDriverId());
         } catch (Exception ex) {
             log.error("Error occurred while processing ride request : {}", event.getRideId());
         }

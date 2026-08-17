@@ -20,7 +20,9 @@ public class RideEventConsumer {
             groupId = "matching-service-group")
     public void rideRequestedEvent(RideRequestedEvent event) {
         try {
+            log.info("Ride Requested Event Received for Ride Id : {} || Rider Id : {}", event.getRideId(), event.getRiderId());
             matchingService.matchNearbyDriver(event);
+            log.info("Ride Matched Event Consumed for Ride Id : {} || Rider Id : {}", event.getRideId(), event.getRiderId());
         } catch (Exception ex) {
             log.error("Error occurred while processing ride request : {}", event.getRideId());
         }
